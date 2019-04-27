@@ -36,13 +36,16 @@ public class MbtaReporter {
     /* 
       Question 2
     */
-    String MBTA_ROUTES_URL = 'https://api-v3.mbta.com/stops?filter[route]=Red'
-    json = new URL(MBTA_ROUTES_URL).text
+    String MBTA_STOPS_URL = 'https://api-v3.mbta.com/stops?filter[route]='
+    routes.each { route ->
+      println "ROUTE: " + route.id
+      json = new URL(MBTA_STOPS_URL + route.id ).text
+      object = jsonSlurper.parseText(json)
+      object.data.each {
+        println "       STOP: $it.attributes.name"
+      }    
+    }
 
-    object = jsonSlurper.parseText(json)
-    object.data.each {
-      println "STOP: $it.attributes.name"
-    }    
     println ""
 
     println "...${APP_NAME} [OK]"
