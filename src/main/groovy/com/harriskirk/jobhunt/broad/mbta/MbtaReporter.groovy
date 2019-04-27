@@ -69,4 +69,8 @@ public class MbtaReporter {
     println ""
     println "...${APP_NAME} [OK]"
   }
+
+  static List getRouteListForJourney(List masterRouteList, String beginningStop, String endingStop) {
+    return []
+  }
 }
