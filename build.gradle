@@ -9,7 +9,6 @@ repositories {
 }
 
 dependencies {
-    compile 'commons-codec:commons-codec:1.6'
     compile 'org.codehaus.groovy:groovy-all:2.4.4'
 }
 
