@@ -38,16 +38,23 @@ public class MbtaReporter {
     */
     String MBTA_STOPS_URL = 'https://api-v3.mbta.com/stops?filter[route]='
     routes.each { route ->
-      println "ROUTE: " + route.id
       json = new URL(MBTA_STOPS_URL + route.id ).text
+      List stops = []
       object = jsonSlurper.parseText(json)
       object.data.each {
-        println "       STOP: $it.attributes.name"
+        stops << it.attributes.name.toString()
       }    
+      route.stops = stops
     }
 
-    println ""
+    List sortedRoutesByStops = routes.sort { it.stops.size() } 
+    
+    sortedRoutesByStops.each { println it.id + ' ' + it.stops.size() }
 
+    println "Route with fewest stops is " + sortedRoutesByStops.first().longName.padRight(25, '.') + '(' + sortedRoutesByStops.first().stops.size() + ' stops)'
+    println "Route with most stops is   " + sortedRoutesByStops.last().longName.padRight(25, '.') + '(' + sortedRoutesByStops.last().stops.size() + ' stops)'
+
+    println ""
     println "...${APP_NAME} [OK]"
   }
 
