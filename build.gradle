@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'application'
 
-mainClassName = 'com.harriskirk.jobhunt.broad.mbta.BitBucketReporter'
+mainClassName = 'com.harriskirk.jobhunt.broad.mbta.MbtaReporter'
 
 repositories {
     mavenCentral()
