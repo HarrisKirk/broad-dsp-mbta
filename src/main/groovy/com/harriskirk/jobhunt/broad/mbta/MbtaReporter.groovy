@@ -32,7 +32,7 @@ public class MbtaReporter {
     println "Question 1: Routes"
     println "------------------"
     routes.each {
-      println it.id
+      println it.longName
     }
 
     /* 
@@ -58,6 +58,13 @@ public class MbtaReporter {
     def routeMostStops   = sortedRoutesByStops.last()
     println "Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
     println "Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
+
+    routes.each {
+      println it.longName.padRight(30) + ':' + it.stops
+    }
+
+
+
 
     println ""
     println "...${APP_NAME} [OK]"
