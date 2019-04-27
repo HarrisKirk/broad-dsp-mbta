@@ -1,2 +1,4 @@
-# broad-dsp-mbta
-MBTA query software for Broad DSP
+# Broad Institute DSP Software Engineering
+## MBTA query tool
+
+
