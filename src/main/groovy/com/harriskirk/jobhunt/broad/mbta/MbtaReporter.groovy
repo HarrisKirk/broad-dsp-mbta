@@ -3,57 +3,65 @@ package com.harriskirk.jobhunt.broad.mbta
 import groovy.json.*
 
 public class MbtaReporter {
-    String username
-    String password
 
-    public static final BB_BASE_URL = 'http://bitbucket.utd.com:7990'
+/*
+    Documentation
+    https://api-v3.mbta.com/docs/swagger/index.html
+*/
 
     public static void main(String [] args ) {
-        println "MBTA Reporter Start..."
+      String MBTA_ROUTES = 'https://api-v3.mbta.com/routes'
 
+      println "MBTA Reporter Start..."
+      def jsonSlurper = new JsonSlurper()
+      String json = new URL(MBTA_ROUTES).text
+      println json
 
-        // def tokens = authString.tokenize(':')
-        // def bbr = new MbtaReporter(tokens[0], tokens[1])
+      //def object = jsonSlurper.parseText(json)
+      //def repos = object.values 
 
-        // def adminMap = [:]
-        // adminMap = bbr.getAdmins()
+      // def tokens = authString.tokenize(':')
+      // def bbr = new MbtaReporter(tokens[0], tokens[1])
 
-        // def BBBaseMap = [:]
-        // BBBaseMap = bbr.getProjects(adminMap)
+      // def adminMap = [:]
+      // adminMap = bbr.getAdmins()
 
-        // println '=' * 100
-        // println 'PROJECT REPORT'
-        // println '=' * 100
+      // def BBBaseMap = [:]
+      // BBBaseMap = bbr.getProjects(adminMap)
 
-        // BBBaseMap.each { proj, projObj ->
-        //   println ''
-        //   println '-' * 120
-        //   println proj.padRight(10) + ',' + projObj.name.padRight(30) + "," + 'Admins: ' + projObj.admins.join('; ')
-        //   println '-' * 120
-        //   projObj.repos.each { repo ->
-        //     println '   ' + repo.name.padRight(50) + 'branches: ' + repo.branches.size()
-        //   }
-        //   println ''
-        // }
+      // println '=' * 100
+      // println 'PROJECT REPORT'
+      // println '=' * 100
 
-        // println ''
-        // println ''
+      // BBBaseMap.each { proj, projObj ->
+      //   println ''
+      //   println '-' * 120
+      //   println proj.padRight(10) + ',' + projObj.name.padRight(30) + "," + 'Admins: ' + projObj.admins.join('; ')
+      //   println '-' * 120
+      //   projObj.repos.each { repo ->
+      //     println '   ' + repo.name.padRight(50) + 'branches: ' + repo.branches.size()
+      //   }
+      //   println ''
+      // }
 
-        // println '=' * 100
-        // println 'USER REPO REPORT'
-        // println '=' * 100
-        // def usersToIgnore = ['~SSHANKAR', '~MHERZOG', '~JVITORINO', '~DBRANDON', '~BJI', '~CCONNELL', 
-        //         '~ASULAIMAN', '~ZCHARTER', '~JPEREIRA', '~LPRABHAKAR', '~JLU', '~PSUSARLA' ]
-        // def repos = bbr.getAllRepos()
-        // def userRepos = repos.findAll { it.project.key.startsWith('~') && !usersToIgnore.contains(it.project.key) }
-        // def sortedUsers = userRepos.sort { a,b ->
-        //   a.project.key <=> b.project.key
-        // }
-        // sortedUsers.each {
-        //   println it.name.padRight(40) + it.project.key
-        // }
-        // println "Size = " + sortedUsers.size()
-        println "...ENDED OK"
+      // println ''
+      // println ''
+
+      // println '=' * 100
+      // println 'USER REPO REPORT'
+      // println '=' * 100
+      // def usersToIgnore = ['~SSHANKAR', '~MHERZOG', '~JVITORINO', '~DBRANDON', '~BJI', '~CCONNELL', 
+      //         '~ASULAIMAN', '~ZCHARTER', '~JPEREIRA', '~LPRABHAKAR', '~JLU', '~PSUSARLA' ]
+      // def repos = bbr.getAllRepos()
+      // def userRepos = repos.findAll { it.project.key.startsWith('~') && !usersToIgnore.contains(it.project.key) }
+      // def sortedUsers = userRepos.sort { a,b ->
+      //   a.project.key <=> b.project.key
+      // }
+      // sortedUsers.each {
+      //   println it.name.padRight(40) + it.project.key
+      // }
+      // println "Size = " + sortedUsers.size()
+      println "...ENDED OK"
     }
 
     private def getAllRepos() {
