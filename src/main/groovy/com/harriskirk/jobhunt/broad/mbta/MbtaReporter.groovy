@@ -17,21 +17,11 @@ public class MbtaReporter {
       String json = new URL(MBTA_ROUTES).text
       println json
 
-      //def object = jsonSlurper.parseText(json)
-      //def repos = object.values 
+      def object = jsonSlurper.parseText(json)
+      def routes = object.data
 
-      // def tokens = authString.tokenize(':')
-      // def bbr = new MbtaReporter(tokens[0], tokens[1])
+      routes.each { println "\nroute=$it" } 
 
-      // def adminMap = [:]
-      // adminMap = bbr.getAdmins()
-
-      // def BBBaseMap = [:]
-      // BBBaseMap = bbr.getProjects(adminMap)
-
-      // println '=' * 100
-      // println 'PROJECT REPORT'
-      // println '=' * 100
 
       // BBBaseMap.each { proj, projObj ->
       //   println ''
