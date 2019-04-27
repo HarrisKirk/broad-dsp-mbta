@@ -24,11 +24,14 @@ public class MbtaReporter {
     String json = new URL(MBTA_ROUTES_METHOD_2).text
 
     def object = jsonSlurper.parseText(json)
-    def routes = object.data
 
-    routes.each { route ->
-      println "Route's long name = $route.attributes.long_name" 
+    List<Route> routes = []
+    object.data.each { route ->
+      routes << new Route( longName: route.attributes.long_name.toString(), id: route.id.toString())
     } 
+    routes.each {
+      println 'Long name: ' + it.id
+    }
 
     /* 
       Question 2
@@ -40,6 +43,7 @@ public class MbtaReporter {
     object.data.each {
       println "STOP: $it.attributes.name"
     }    
+    println ""
 
     println "...${APP_NAME} [OK]"
   }
