@@ -6,7 +6,8 @@ A java 8 jdk must be installed.
 ```
 ./gradle run
 ```
-### Discussion
+### Discussions
+
 The 'filtering' URL method was used to
 * limit the amount of network traffic
 * eliminate writing the small amount of conditional logic to include the 2 types of rail routes

@@ -15,11 +15,11 @@ public class MbtaReporter {
     /* 
       Question 1
     */
-
     //String MBTA_ROUTES_METHOD_1 = 'https://api-v3.mbta.com/routes'
     String MBTA_ROUTES_METHOD_2 = 'https://api-v3.mbta.com/routes?filter[type]=0,1'
 
     println "${APP_NAME} Start..."
+    println ""
     def jsonSlurper = new JsonSlurper()
     String json = new URL(MBTA_ROUTES_METHOD_2).text
 
@@ -29,13 +29,18 @@ public class MbtaReporter {
     object.data.each { route ->
       routes << new Route( longName: route.attributes.long_name.toString(), id: route.id.toString())
     } 
+    println "Question 1: Routes"
+    println "------------------"
     routes.each {
-      println 'Long name: ' + it.id
+      println it.id
     }
 
     /* 
       Question 2
     */
+    println ""
+    println "Question 2: Stops"
+    println "-----------------"
     String MBTA_STOPS_URL = 'https://api-v3.mbta.com/stops?filter[route]='
     routes.each { route ->
       json = new URL(MBTA_STOPS_URL + route.id ).text
@@ -49,14 +54,12 @@ public class MbtaReporter {
 
     List sortedRoutesByStops = routes.sort { it.stops.size() } 
     
-    sortedRoutesByStops.each { println it.id + ' ' + it.stops.size() }
-
-    println "Route with fewest stops is " + sortedRoutesByStops.first().longName.padRight(25, '.') + '(' + sortedRoutesByStops.first().stops.size() + ' stops)'
-    println "Route with most stops is   " + sortedRoutesByStops.last().longName.padRight(25, '.') + '(' + sortedRoutesByStops.last().stops.size() + ' stops)'
+    def routeFewestStops = sortedRoutesByStops.first()
+    def routeMostStops   = sortedRoutesByStops.last()
+    println "Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
+    println "Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
     println ""
     println "...${APP_NAME} [OK]"
   }
-
-
 }
