@@ -10,17 +10,17 @@ public class MbtaReporter {
 */
 
     public static void main(String [] args ) {
-      String MBTA_ROUTES = 'https://api-v3.mbta.com/routes'
+      String MBTA_ROUTES_METHOD_1 = 'https://api-v3.mbta.com/routes'
+      String MBTA_ROUTES_METHOD_2 = 'https://api-v3.mbta.com/routes?filter[type]=0,1'
 
       println "MBTA Reporter Start..."
       def jsonSlurper = new JsonSlurper()
-      String json = new URL(MBTA_ROUTES).text
-      println json
+      String json = new URL(MBTA_ROUTES_METHOD_2).text
 
       def object = jsonSlurper.parseText(json)
       def routes = object.data
 
-      routes.each { println "\nroute=$it" } 
+      routes.each { println "\nroute=$it.attributes.long_name" } 
 
 
       // BBBaseMap.each { proj, projObj ->
