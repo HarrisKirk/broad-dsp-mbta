@@ -70,9 +70,12 @@ public class MbtaReporter {
     println "----------------------------"
     println "Question 3: Stop A to Stop B"
     println "----------------------------"
-    String beginStop  = 'Alewife' // todo input system property
-    // String endStop    = 'Wonderland' // 
-    String endStop    = 'Oak Grove'
+    String beginStop  = System.properties['BEGIN_STOP'] // todo input system property
+    String endStop    = System.properties['END_STOP']
+
+    println beginStop
+    println endStop
+
     String beginRoute = routes.find { it.stops.contains(beginStop) } // What if stop on >1 route?
     String endRoute   = routes.find { it.stops.contains(endStop) } // what if stop on >1 route?
     println beginRoute + ' on ' + beginRoute + ' ' + beginRoute.getClass().getName()
