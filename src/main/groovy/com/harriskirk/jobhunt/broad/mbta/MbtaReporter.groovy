@@ -59,13 +59,6 @@ public class MbtaReporter {
     println "Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
     println "Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
-    routes.each {
-      println it.longName.padRight(30) + ':' + it.stops
-    }
-
-    List stops = ['A', 'P', 'N']
-
-
     println ""
     println "...${APP_NAME} [OK]"
   }
