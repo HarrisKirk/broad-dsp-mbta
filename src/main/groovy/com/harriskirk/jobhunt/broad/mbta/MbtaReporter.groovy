@@ -56,8 +56,11 @@ public class MbtaReporter {
     
     def routeFewestStops = sortedRoutesByStops.first()
     def routeMostStops   = sortedRoutesByStops.last()
-    println "Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
-    println "Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
+    println "(1) Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
+    println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
+
+
+
 
     println ""
     println "...${APP_NAME} [OK]"
