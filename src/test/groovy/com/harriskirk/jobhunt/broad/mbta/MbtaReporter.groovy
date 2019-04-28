@@ -16,19 +16,33 @@ public class MbtaReporterTest extends GroovyTestCase {
       expectedStops: [P: ['G', 'R']]
     ]
 
-    Map expectedStopsWithMultiRoutes = testCase1.expectedStops
-    def actualStopsWithMultiRoutes = MbtaReporter.getStopsWithMultiRoutes ( testCase1.routeList )
+    def testCase2 = [
+      routeList: [
+        new Route(id:'R', stops:['A', 'P', 'Q']),
+        new Route(id:'O', stops:['C', 'H', 'O']),
+        new Route(id:'G', stops:['L', 'P', 'Y']),
+        new Route(id:'Y', stops:['D', 'E', 'H']),
+        new Route(id:'B', stops:['X', 'U', 'M', 'S']),
+      ],
+      expectedStops: [P: ['G', 'R'], H: ['O', 'Y']]
+    ]
 
-    Set expectedStopList = expectedStopsWithMultiRoutes.keySet()
-    Set actualStopList   = actualStopsWithMultiRoutes.keySet()
-    // List of stops as expected?
-    assertEquals ( expectedStopList, actualStopList )
+    def testCases = [testCase1, testCase2]
+    testCases.each { testCase ->
+      Map expectedStopsWithMultiRoutes = testCase.expectedStops
+      def actualStopsWithMultiRoutes = MbtaReporter.getStopsWithMultiRoutes ( testCase.routeList )
 
-    expectedStopList.each {
-      String expectedRoutes = new TreeSet (expectedStopsWithMultiRoutes.get(it))
-      String actualRoutes   = new TreeSet (actualStopsWithMultiRoutes.get(it))
-      // List of routes per stop as expected?
-      assertEquals ( expectedRoutes, actualRoutes ) 
+      Set expectedStopList = expectedStopsWithMultiRoutes.keySet()
+      Set actualStopList   = actualStopsWithMultiRoutes.keySet()
+      // List of stops as expected?
+      assertEquals ( expectedStopList, actualStopList )
+
+      expectedStopList.each {
+        String expectedRoutes = new TreeSet (expectedStopsWithMultiRoutes.get(it))
+        String actualRoutes   = new TreeSet (actualStopsWithMultiRoutes.get(it))
+        // List of routes per stop as expected?
+        assertEquals ( expectedRoutes, actualRoutes ) 
+      }
     }
   }
 }
