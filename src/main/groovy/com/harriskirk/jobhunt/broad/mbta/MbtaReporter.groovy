@@ -60,35 +60,35 @@ public class MbtaReporter {
     println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
     println "ROUTES per STOP"
-    List routesPerStop = getStopsWithMultiRoutes(routes)
-    routesPerStop.each { k, v ->
-      println k
+    List<Stop> multiRouteStops = getStopsWithMultiRoutes(routes)
+    multiRouteStops.each { 
+      println "Stop " + it.id
     }
 
     println ""
     println "...${APP_NAME} [OK]"
   }
 
-  static List getStopsWithMultiRoutes(List masterRouteList) {
-    // def routesPerStop = [:] // map of stop names and list of route names that pass thru that stop
-    // for (int i=0; i<routes.size-1; i++ ) {
-    //   println "ROUTE " + routes[i].toString().padRight(30) //+ ' with stops ' + routes[i].stops
-    //   for (int j=i+1; j<routes.size(); j++ ) {
-    //     println "    route " + routes[j].toString().padRight(30)// + ' with stops ' + routes[j].stops
+  static List getStopsWithMultiRoutes(List routes) {
+    def routesPerStop = [:] // map of stop names and list of route names that pass thru that stop
+    for (int i=0; i<routes.size-1; i++ ) {
+      println "ROUTE " + routes[i].toString().padRight(30) //+ ' with stops ' + routes[i].stops
+      for (int j=i+1; j<routes.size(); j++ ) {
+        println "    route " + routes[j].toString().padRight(30)// + ' with stops ' + routes[j].stops
 
-    //     def commonStops = routes[i].stops.intersect(routes[j].stops)
-    //     println ('     common stops are: ' + commonStops)
-    //     commonStops.each {
-    //       def routesFound = routesPerStop.get(it)
-    //       if (routesFound && !routesFound.contains(it)) {
-    //         routesFound << routes[i]
-    //         routesFound << routes[j]
-    //         routesPerStop[it] = routesFound
-    //       }
-    //     }
-    //     //commonStops.each { routesPerStop[it] = }
-    //   }
-    // }
+        def commonStops = routes[i].stops.intersect(routes[j].stops)
+        println ('     common stops are: ' + commonStops)
+        commonStops.each {
+          def routesFound = routesPerStop.get(it)
+          if (routesFound && !routesFound.contains(it)) {
+            routesFound << routes[i]
+            routesFound << routes[j]
+            routesPerStop[it] = routesFound
+          }
+        }
+        //commonStops.each { routesPerStop[it] = }
+      }
+    }
     return []
   }
 
