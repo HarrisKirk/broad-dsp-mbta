@@ -29,6 +29,7 @@ public class MbtaReporter {
     object.data.each { route ->
       routes << new Route( longName: route.attributes.long_name.toString(), id: route.id.toString())
     } 
+    println "------------------"
     println "Question 1: Routes"
     println "------------------"
     routes.each {
@@ -39,6 +40,7 @@ public class MbtaReporter {
       Question 2
     */
     println ""
+    println "-----------------"
     println "Question 2: Stops"
     println "-----------------"
     String MBTA_STOPS_URL = 'https://api-v3.mbta.com/stops?filter[route]='
@@ -71,34 +73,24 @@ public class MbtaReporter {
   static Map getStopsWithMultiRoutes(List routes) {
     Map stopsWithRoutes = [:] // map of stop names and list of route names that pass thru that stop
     for (int i=0; i<routes.size-1; i++ ) {
-      // println "ROUTE " + routes[i].toString().padRight(20) + ' with stops ' + routes[i].stops
       for (int j=i+1; j<routes.size(); j++ ) {
-        // println "    route " + routes[j].toString().padRight(20) + ' with stops ' + routes[j].stops
-
         def commonStops = routes[i].stops.intersect(routes[j].stops) // stops in common to both routes
-        // println ('     common stops are: ' + commonStops)
         commonStops.each {
           def routesFound = []
           def temp = stopsWithRoutes.get(it)
           if (temp) {
             routesFound = temp
           }
-          // println "    Routes already existed for $it : " + routesFound
           if (!routesFound || !routesFound.contains(it)) {
-            // print '            will add routes ' + routes[i] + ' and ' + routes[j]
             routesFound << routes[i]
             routesFound << routes[j]
             stopsWithRoutes.put( it, routesFound.toSet())
           }
-          // println "    Now stopsWithRoutes is: " + stopsWithRoutes
         }
       }
     }
-    // println "stopsWithRoutes: " + stopsWithRoutes
 
     return stopsWithRoutes
   }
-
-  // recursive
 
 }

@@ -8,23 +8,23 @@ public class MbtaReporterTest extends GroovyTestCase {
     
     def testCase1 = [
       routeList: [
-        new Route(id:'R', stops:['A', 'P', 'Q']),
-        new Route(id:'O', stops:['C', 'H', 'O']),
-        new Route(id:'G', stops:['L', 'P', 'Y']),
-        new Route(id:'B', stops:['X', 'U', 'M', 'S']),
+        new Route(id:'Red',     stops:['A', 'P', 'Q']),
+        new Route(id:'Orange',  stops:['C', 'H', 'O']),
+        new Route(id:'Green',   stops:['L', 'P', 'Y']),
+        new Route(id:'Blue',    stops:['X', 'U', 'M', 'S']),
       ],
       expectedStops: [P: ['G', 'R']]
     ]
 
     def testCase2 = [
       routeList: [
-        new Route(id:'R', stops:['A', 'P', 'Q']),
-        new Route(id:'O', stops:['C', 'H', 'O']),
-        new Route(id:'G', stops:['L', 'P', 'Y']),
-        new Route(id:'Y', stops:['D', 'E', 'H']),
-        new Route(id:'B', stops:['X', 'U', 'M', 'S']),
+        new Route(id:'Red',     stops:['A', 'P', 'Q']),
+        new Route(id:'Orange',  stops:['C', 'H', 'O']),
+        new Route(id:'Green',   stops:['L', 'P', 'Y']),
+        new Route(id:'Yellow',  stops:['D', 'E', 'H']),
+        new Route(id:'Blue',    stops:['X', 'U', 'M', 'S']),
       ],
-      expectedStops: [P: ['G', 'R'], H: ['O', 'Y']]
+      expectedStops: [P: ['Green', 'Red'], H: ['Orange', 'Yellow']]
     ]
 
     def testCases = [testCase1, testCase2]
