@@ -21,11 +21,13 @@ public class MbtaReporterTest extends GroovyTestCase {
 
     Set expectedStopList = expectedStopsWithMultiRoutes.keySet()
     Set actualStopList   = actualStopsWithMultiRoutes.keySet()
+    // List of stops as expected?
     assertEquals ( expectedStopList, actualStopList )
 
     expectedStopList.each {
       String expectedRoutes = new TreeSet (expectedStopsWithMultiRoutes.get(it))
       String actualRoutes   = new TreeSet (actualStopsWithMultiRoutes.get(it))
+      // List of routes per stop as expected?
       assertEquals ( expectedRoutes, actualRoutes ) 
     }
   }
