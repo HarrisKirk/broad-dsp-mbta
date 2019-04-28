@@ -59,49 +59,36 @@ public class MbtaReporter {
     println "(1) Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
     println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
-    def routesPerStop = [:] // map of stop names and list of route names that pass thru that stop
-    for (int i=0; i<routes.size-1; i++ ) {
-      println "ROUTE " + routes[i].toString().padRight(30) //+ ' with stops ' + routes[i].stops
-      for (int j=i+1; j<routes.size(); j++ ) {
-        println "    route " + routes[j].toString().padRight(30)// + ' with stops ' + routes[j].stops
-
-        def commonStops = routes[i].stops.intersect(routes[j].stops)
-        println ('     common stops are: ' + commonStops)
-        commonStops.each {
-          def routesFound = routesPerStop.get(it)
-          if (routesFound && !routesFound.contains(it)) {
-            routesFound << routes[i]
-            routesFound << routes[j]
-            routesPerStop[it] = routesFound
-          }
-        }
-        //commonStops.each { routesPerStop[it] = }
-      }
+    println "ROUTES per STOP"
+    List routesPerStop = getStopsWithMultiRoutes(routes)
+    routesPerStop.each { k, v ->
+      println k
     }
 
     println ""
     println "...${APP_NAME} [OK]"
   }
 
-  static List getRouteListForJourney(List masterRouteList, String beginningStop, String endingStop) {
-    // def routesPendingExamination = masterRouteList.collect()
-    // def journeyRoutes = []
-    // def startingRoute = masterRouteList.find {it.stops.contains(beginningStop)}
-    // journeyRoutes << startingRoute
-    // routesPendingExamination.remove(startingRoute)
-    // println "startingRoute " + startingRoute
-    // println "routesPendingExamination " + routesPendingExamination
+  static List getStopsWithMultiRoutes(List masterRouteList) {
+    // def routesPerStop = [:] // map of stop names and list of route names that pass thru that stop
+    // for (int i=0; i<routes.size-1; i++ ) {
+    //   println "ROUTE " + routes[i].toString().padRight(30) //+ ' with stops ' + routes[i].stops
+    //   for (int j=i+1; j<routes.size(); j++ ) {
+    //     println "    route " + routes[j].toString().padRight(30)// + ' with stops ' + routes[j].stops
 
-    // routeToCompare = startingRoute
-    // routesPendingExamination.each { pendingRoute ->
-    //   if ( pendingRoute.stops.contains( endingStop )) {
-    //     journeyRoutes << 
-    //     break // all done - journey found
-    //   } else {
-    //     if ( it.stops.intersect()
+    //     def commonStops = routes[i].stops.intersect(routes[j].stops)
+    //     println ('     common stops are: ' + commonStops)
+    //     commonStops.each {
+    //       def routesFound = routesPerStop.get(it)
+    //       if (routesFound && !routesFound.contains(it)) {
+    //         routesFound << routes[i]
+    //         routesFound << routes[j]
+    //         routesPerStop[it] = routesFound
+    //       }
+    //     }
+    //     //commonStops.each { routesPerStop[it] = }
     //   }
     // }
-
     return []
   }
 
