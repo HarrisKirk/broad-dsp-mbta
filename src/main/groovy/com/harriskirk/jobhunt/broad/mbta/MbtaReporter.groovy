@@ -80,8 +80,11 @@ public class MbtaReporter {
         println ('     common stops are: ' + commonStops)
         commonStops.each {
           List routesFound = []
-          routesFound << stopsWithRoutes.get(it)
-          println "    Routes found for $it are: " + routesFound
+          def temp = stopsWithRoutes.get(it)
+          if (temp) {
+            routesFound = temp
+          }
+          println "    Routes already existed for $it : " + routesFound
           if (!routesFound || !routesFound.contains(it)) {
             print '            will add routes ' + routes[i] + ' and ' + routes[j]
             routesFound << routes[i]
