@@ -59,10 +59,10 @@ public class MbtaReporter {
     println "(1) Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
     println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
-    println "ROUTES per STOP"
+    println "(3) Stops with multiple routes going through it."
     Map multiRouteStops = getStopsWithMultiRoutes(routes)
-    multiRouteStops.each { 
-      println "Stop " + it
+    multiRouteStops.each { k, v ->
+      println k.padRight(25) + v
     }
 
     println ""
