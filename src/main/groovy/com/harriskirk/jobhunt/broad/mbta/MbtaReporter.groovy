@@ -63,7 +63,7 @@ public class MbtaReporter {
       println it.longName.padRight(30) + ':' + it.stops
     }
 
-
+    List stops = ['A', 'P', 'N']
 
 
     println ""
@@ -71,13 +71,23 @@ public class MbtaReporter {
   }
 
   static List getRouteListForJourney(List masterRouteList, String beginningStop, String endingStop) {
-    def routesPendingExamination = masterRouteList.collect()
-    def journeyRoutes = []
-    def startingRoute = masterRouteList.find {it.stops.contains(beginningStop)}
-    journeyRoutes << startingRoute
-    routesPendingExamination.remove(startingRoute)
-    println "startingRoute " + startingRoute
-    println "routesPendingExamination " + routesPendingExamination
+    // def routesPendingExamination = masterRouteList.collect()
+    // def journeyRoutes = []
+    // def startingRoute = masterRouteList.find {it.stops.contains(beginningStop)}
+    // journeyRoutes << startingRoute
+    // routesPendingExamination.remove(startingRoute)
+    // println "startingRoute " + startingRoute
+    // println "routesPendingExamination " + routesPendingExamination
+
+    // routeToCompare = startingRoute
+    // routesPendingExamination.each { pendingRoute ->
+    //   if ( pendingRoute.stops.contains( endingStop )) {
+    //     journeyRoutes << 
+    //     break // all done - journey found
+    //   } else {
+    //     if ( it.stops.intersect()
+    //   }
+    // }
 
     return []
   }
