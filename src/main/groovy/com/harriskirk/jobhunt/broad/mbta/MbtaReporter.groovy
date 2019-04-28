@@ -61,12 +61,12 @@ public class MbtaReporter {
 
     def stopRoutes = [:] // map of stop names and list of route names that pass thru that stop
     for (int i=0; i<routes.size-1; i++ ) {
-      println "ROUTE " + routes[i].toString().padRight(30) + ' with stops ' + routes[i].stops
+      println "ROUTE " + routes[i].toString().padRight(30) //+ ' with stops ' + routes[i].stops
       for (int j=i+1; j<routes.size(); j++ ) {
-        println "    route " + routes[j].toString().padRight(30) + ' with stops ' + routes[j].stops
+        println "    route " + routes[j].toString().padRight(30)// + ' with stops ' + routes[j].stops
 
         def commonStops = routes[i].stops.intersect(routes[j].stops)
-        //println ('' + routes[i] + " in common with " + routes[j]).toString().padRight(50) + ' are ' + commonStops
+        println ('     common stops are: ' + commonStops)
         //commonStops.each { stopRoutes[it] = }
       }
     }
