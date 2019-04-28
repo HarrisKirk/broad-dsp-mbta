@@ -69,7 +69,7 @@ public class MbtaReporter {
     println "...${APP_NAME} [OK]"
   }
 
-  static List getStopsWithMultiRoutes(List routes) {
+  static Map getStopsWithMultiRoutes(List routes) {
     Map stopsWithRoutes = [:] // map of stop names and list of route names that pass thru that stop
     for (int i=0; i<routes.size-1; i++ ) {
       println "ROUTE " + routes[i].toString().padRight(20) + ' with stops ' + routes[i].stops
@@ -86,14 +86,15 @@ public class MbtaReporter {
             print '            will add routes ' + routes[i] + ' and ' + routes[j]
             routesFound << routes[i]
             routesFound << routes[j]
-            stopsWithRoutes.put( it, routesFound )
+            stopsWithRoutes.put( it, routesFound.toSet())
           }
           println "    Now stopsWithRoutes is: " + stopsWithRoutes
         }
       }
     }
     println "stopsWithRoutes: " + stopsWithRoutes
-    return []
+
+    return stopsWithRoutes
   }
 
   // recursive
