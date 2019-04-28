@@ -66,20 +66,19 @@ public class MbtaReporter {
       println k.padRight(25) + v
     }
 
+    String beginStop  = System.properties['BEGIN_STOP'] 
+    String endStop    = System.properties['END_STOP']
+
+    boolean hasStopProperties = (beginStop && endStop)
+    if (!hasStopProperties) System.exit(0) // Halt here if both properties are missing
+
     println ""
     println "----------------------------"
     println "Question 3: Stop A to Stop B"
     println "----------------------------"
-    String beginStop  = System.properties['BEGIN_STOP'] // todo input system property
-    String endStop    = System.properties['END_STOP']
-
-    println 'BEGIN_STOP = ' + beginStop
-    println 'END_STOP   = ' + endStop
 
     String beginRoute = routes.find { it.stops.contains(beginStop) } // What if stop on >1 route?
     String endRoute   = routes.find { it.stops.contains(endStop) } // what if stop on >1 route?
-    // println beginRoute + ' on ' + beginRoute + ' ' + beginRoute.getClass().getName()
-    // println endRoute + ' on ' + endRoute + ' ' + beginRoute.getClass().getName()
 
     List journeyRoutes = [] // routes that can be taken from beginStop - endStop
 
@@ -90,15 +89,15 @@ public class MbtaReporter {
 
     // Case 2 - 1 transfer (ie, there is a stop having both routes)
     multiRouteStops.each { k, connectingRoutes ->
-      // println connectingRoutes  
-      // connectingRoutes.each { println '   ' + it + ' ' + it.getClass().getName() }
       if (connectingRoutes.find{ it.id == beginRoute} && connectingRoutes.find{ it.id == endRoute})  {
         journeyRoutes = [beginRoute, endRoute]
       }
     }
 
-    println "journey routes: " + journeyRoutes.unique()
+    // Case 3 - multiple transfers 
+    // TBD - needs a recursive and/or more algorithmic approach
 
+    println beginStop + ' to ' + endStop + ' -> ' + journeyRoutes.unique()
 
     println ""
     println "...${APP_NAME} [OK]"
