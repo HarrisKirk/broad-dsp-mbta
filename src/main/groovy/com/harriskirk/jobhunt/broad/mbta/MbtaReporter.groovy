@@ -71,6 +71,17 @@ public class MbtaReporter {
   }
 
   static List getRouteListForJourney(List masterRouteList, String beginningStop, String endingStop) {
+    def routesPendingExamination = masterRouteList.collect()
+    def journeyRoutes = []
+    def startingRoute = masterRouteList.find {it.stops.contains(beginningStop)}
+    journeyRoutes << startingRoute
+    routesPendingExamination.remove(startingRoute)
+    println "startingRoute " + startingRoute
+    println "routesPendingExamination " + routesPendingExamination
+
     return []
   }
+
+  // recursive
+
 }
