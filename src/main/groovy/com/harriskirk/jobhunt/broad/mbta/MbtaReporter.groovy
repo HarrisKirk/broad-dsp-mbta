@@ -70,25 +70,29 @@ public class MbtaReporter {
   }
 
   static List getStopsWithMultiRoutes(List routes) {
-    def routesPerStop = [:] // map of stop names and list of route names that pass thru that stop
+    Map stopsWithRoutes = [:] // map of stop names and list of route names that pass thru that stop
     for (int i=0; i<routes.size-1; i++ ) {
-      println "ROUTE " + routes[i].toString().padRight(30) //+ ' with stops ' + routes[i].stops
+      println "ROUTE " + routes[i].toString().padRight(20) + ' with stops ' + routes[i].stops
       for (int j=i+1; j<routes.size(); j++ ) {
-        println "    route " + routes[j].toString().padRight(30)// + ' with stops ' + routes[j].stops
+        println "    route " + routes[j].toString().padRight(20) + ' with stops ' + routes[j].stops
 
-        def commonStops = routes[i].stops.intersect(routes[j].stops)
+        def commonStops = routes[i].stops.intersect(routes[j].stops) // stops in common to both routes
         println ('     common stops are: ' + commonStops)
         commonStops.each {
-          def routesFound = routesPerStop.get(it)
-          if (routesFound && !routesFound.contains(it)) {
+          List routesFound = []
+          routesFound << stopsWithRoutes.get(it)
+          println "    Routes found for $it are: " + routesFound
+          if (!routesFound || !routesFound.contains(it)) {
+            print '            will add routes ' + routes[i] + ' and ' + routes[j]
             routesFound << routes[i]
             routesFound << routes[j]
-            routesPerStop[it] = routesFound
+            stopsWithRoutes.put( it, routesFound )
           }
+          println "    Now stopsWithRoutes is: " + stopsWithRoutes
         }
-        //commonStops.each { routesPerStop[it] = }
       }
     }
+    println "stopsWithRoutes: " + stopsWithRoutes
     return []
   }
 

@@ -9,7 +9,7 @@ public class MbtaReporterTest extends GroovyTestCase {
     def masterRouteList = [
       new Route(id:'R', stops:['A', 'P', 'Q']),
       new Route(id:'O', stops:['C', 'H', 'O']),
-      new Route(id:'G', stops:['A', 'P', 'H']),
+      new Route(id:'G', stops:['L', 'P', 'H']),
       new Route(id:'B', stops:['X', 'U', 'M', 'S']),
     ]
 
