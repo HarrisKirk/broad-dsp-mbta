@@ -59,8 +59,17 @@ public class MbtaReporter {
     println "(1) Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
     println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
+    def stopRoutes = [:] // map of stop names and list of route names that pass thru that stop
+    for (int i=0; i<routes.size-1; i++ ) {
+      println "ROUTE " + routes[i].toString().padRight(30) + ' with stops ' + routes[i].stops
+      for (int j=i+1; j<routes.size(); j++ ) {
+        println "    route " + routes[j].toString().padRight(30) + ' with stops ' + routes[j].stops
 
-
+        def commonStops = routes[i].stops.intersect(routes[j].stops)
+        //println ('' + routes[i] + " in common with " + routes[j]).toString().padRight(50) + ' are ' + commonStops
+        //commonStops.each { stopRoutes[it] = }
+      }
+    }
 
     println ""
     println "...${APP_NAME} [OK]"
