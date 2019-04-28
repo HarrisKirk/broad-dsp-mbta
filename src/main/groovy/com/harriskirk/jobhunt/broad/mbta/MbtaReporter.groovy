@@ -58,7 +58,6 @@ public class MbtaReporter {
     def routeMostStops   = sortedRoutesByStops.last()
     println "(1) Route with fewest stops is: " + routeFewestStops.longName.padRight(25, '.') + ' (' + routeFewestStops.stops.size() + ' stops)'
     println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
-
     println "(3) Stops with multiple routes going through it."
     Map multiRouteStops = getStopsWithMultiRoutes(routes)
     multiRouteStops.each { k, v ->
@@ -72,30 +71,30 @@ public class MbtaReporter {
   static Map getStopsWithMultiRoutes(List routes) {
     Map stopsWithRoutes = [:] // map of stop names and list of route names that pass thru that stop
     for (int i=0; i<routes.size-1; i++ ) {
-      println "ROUTE " + routes[i].toString().padRight(20) + ' with stops ' + routes[i].stops
+      // println "ROUTE " + routes[i].toString().padRight(20) + ' with stops ' + routes[i].stops
       for (int j=i+1; j<routes.size(); j++ ) {
-        println "    route " + routes[j].toString().padRight(20) + ' with stops ' + routes[j].stops
+        // println "    route " + routes[j].toString().padRight(20) + ' with stops ' + routes[j].stops
 
         def commonStops = routes[i].stops.intersect(routes[j].stops) // stops in common to both routes
-        println ('     common stops are: ' + commonStops)
+        // println ('     common stops are: ' + commonStops)
         commonStops.each {
           def routesFound = []
           def temp = stopsWithRoutes.get(it)
           if (temp) {
             routesFound = temp
           }
-          println "    Routes already existed for $it : " + routesFound
+          // println "    Routes already existed for $it : " + routesFound
           if (!routesFound || !routesFound.contains(it)) {
-            print '            will add routes ' + routes[i] + ' and ' + routes[j]
+            // print '            will add routes ' + routes[i] + ' and ' + routes[j]
             routesFound << routes[i]
             routesFound << routes[j]
             stopsWithRoutes.put( it, routesFound.toSet())
           }
-          println "    Now stopsWithRoutes is: " + stopsWithRoutes
+          // println "    Now stopsWithRoutes is: " + stopsWithRoutes
         }
       }
     }
-    println "stopsWithRoutes: " + stopsWithRoutes
+    // println "stopsWithRoutes: " + stopsWithRoutes
 
     return stopsWithRoutes
   }
