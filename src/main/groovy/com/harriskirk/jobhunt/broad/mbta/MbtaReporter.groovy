@@ -73,10 +73,10 @@ public class MbtaReporter {
     String beginStop  = 'Alewife' // todo input system property
     // String endStop    = 'Wonderland' // 
     String endStop    = 'Oak Grove'
-    String beginRoute = routes.find { it.stops.contains(beginStop) }.id
-    String endRoute   = routes.find { it.stops.contains(endStop) }.id
-    println beginStop + ' on ' + beginRoute
-    println endStop + ' on ' + endRoute
+    String beginRoute = routes.find { it.stops.contains(beginStop) } // What if stop on >1 route?
+    String endRoute   = routes.find { it.stops.contains(endStop) } // what if stop on >1 route?
+    println beginRoute + ' on ' + beginRoute + ' ' + beginRoute.getClass().getName()
+    println endRoute + ' on ' + endRoute + ' ' + beginRoute.getClass().getName()
 
     List journeyRoutes = [] // routes that can be taken from beginStop - endStop
 
@@ -87,10 +87,10 @@ public class MbtaReporter {
 
     // Case 2 - 1 transfer (ie, there is a stop having both routes)
     multiRouteStops.each { k, connectingRoutes ->
-      println connectingRoutes    
-      if (connectingRoutes.contains(beginRoute) && connectingRoutes.contains(endRoute)) {
-        // journeyRoutes = [beginRoute, endRoute]
-        journeyRoutes = ['a', 'b']
+      // println connectingRoutes  
+      // connectingRoutes.each { println '   ' + it + ' ' + it.getClass().getName() }
+      if (connectingRoutes.find{ it.id == beginRoute} && connectingRoutes.find{ it.id == endRoute})  {
+        journeyRoutes = [beginRoute, endRoute]
       }
     }
 
