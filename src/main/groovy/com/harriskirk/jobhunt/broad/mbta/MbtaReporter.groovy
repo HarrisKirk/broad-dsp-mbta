@@ -73,13 +73,13 @@ public class MbtaReporter {
     String beginStop  = System.properties['BEGIN_STOP'] // todo input system property
     String endStop    = System.properties['END_STOP']
 
-    println beginStop
-    println endStop
+    println 'BEGIN_STOP = ' + beginStop
+    println 'END_STOP   = ' + endStop
 
     String beginRoute = routes.find { it.stops.contains(beginStop) } // What if stop on >1 route?
     String endRoute   = routes.find { it.stops.contains(endStop) } // what if stop on >1 route?
-    println beginRoute + ' on ' + beginRoute + ' ' + beginRoute.getClass().getName()
-    println endRoute + ' on ' + endRoute + ' ' + beginRoute.getClass().getName()
+    // println beginRoute + ' on ' + beginRoute + ' ' + beginRoute.getClass().getName()
+    // println endRoute + ' on ' + endRoute + ' ' + beginRoute.getClass().getName()
 
     List journeyRoutes = [] // routes that can be taken from beginStop - endStop
 
@@ -97,7 +97,7 @@ public class MbtaReporter {
       }
     }
 
-    println "1 possible journey routes: " + journeyRoutes
+    println "journey routes: " + journeyRoutes.unique()
 
 
     println ""
