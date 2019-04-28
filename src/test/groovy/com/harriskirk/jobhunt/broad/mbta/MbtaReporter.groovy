@@ -18,7 +18,7 @@ public class MbtaReporterTest extends GroovyTestCase {
     Map expectedStopsWithMultiRoutes = [P: ['G', 'R'].toSet() ]
     def actualStopsWithMultiRoutes = MbtaReporter.getStopsWithMultiRoutes ( masterRouteList )
 
-    assertEquals ( expectedStopsWithMultiRoutes, actualStopsWithMultiRoutes )
+    assertEquals ( expectedStopsWithMultiRoutes.keySet(), actualStopsWithMultiRoutes.keySet() )
   }
 
 }
