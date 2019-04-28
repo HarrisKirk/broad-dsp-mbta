@@ -67,6 +67,19 @@ public class MbtaReporter {
     }
 
     println ""
+    println "----------------------------"
+    println "Question 3: Stop A to Stop B"
+    println "----------------------------"
+    String beginStop  = 'Alewife' // todo input system property
+    String endStop    = 'Wonderland' // 
+    String beginRoute = routes.find { it.stops.contains(beginStop) }.longName
+    String endRoute   = routes.find { it.stops.contains(endStop) }.longName
+    println beginStop + ' on ' + beginRoute
+    println endStop + ' on ' + endRoute
+
+
+
+    println ""
     println "...${APP_NAME} [OK]"
   }
 
