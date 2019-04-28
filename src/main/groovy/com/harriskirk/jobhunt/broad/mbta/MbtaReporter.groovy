@@ -60,9 +60,9 @@ public class MbtaReporter {
     println "(2) Route with most stops is:   " + routeMostStops.longName.padRight(25, '.') +  ' (' + routeMostStops.stops.size() + ' stops)'
 
     println "ROUTES per STOP"
-    List<Stop> multiRouteStops = getStopsWithMultiRoutes(routes)
+    Map multiRouteStops = getStopsWithMultiRoutes(routes)
     multiRouteStops.each { 
-      println "Stop " + it.id
+      println "Stop " + it
     }
 
     println ""
@@ -79,7 +79,7 @@ public class MbtaReporter {
         def commonStops = routes[i].stops.intersect(routes[j].stops) // stops in common to both routes
         println ('     common stops are: ' + commonStops)
         commonStops.each {
-          List routesFound = []
+          def routesFound = []
           def temp = stopsWithRoutes.get(it)
           if (temp) {
             routesFound = temp
