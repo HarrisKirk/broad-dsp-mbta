@@ -13,7 +13,7 @@ public class MbtaReporterTest extends GroovyTestCase {
         new Route(id:'G', stops:['L', 'P', 'Y']),
         new Route(id:'B', stops:['X', 'U', 'M', 'S']),
       ],
-      expectedStops: [P: ['G', 'R'].toSet() ]
+      expectedStops: [P: new TreeSet(['G', 'R'])]
     ]
 
     Map expectedStopsWithMultiRoutes = testCase1.expectedStops
@@ -23,9 +23,11 @@ public class MbtaReporterTest extends GroovyTestCase {
     Set actualStopList   = actualStopsWithMultiRoutes.keySet()
     assertEquals ( expectedStopList.toSet().toString(), actualStopList.toSet().toString() )
 
-    // expectedStopList.each { it ->
-    //   assertEquals ( expectedStopsWithMultiRoutes.get(it).toSet(), actualStopsWithMultiRoutes.get(it).toSet())
-    // }
+    expectedStopList.each {
+     String expectedRoutes = new TreeSet (expectedStopsWithMultiRoutes.get(it)).toString()
+     String actualRoutes   = new TreeSet (actualStopsWithMultiRoutes.get(it)).toString()
+     assertEquals ( expectedRoutes, actualRoutes ) 
+    }
   }
 }
 
