@@ -13,7 +13,7 @@ public class MbtaReporterTest extends GroovyTestCase {
         new Route(id:'G', stops:['L', 'P', 'Y']),
         new Route(id:'B', stops:['X', 'U', 'M', 'S']),
       ],
-      expectedStops: [P: new TreeSet(['G', 'R'])]
+      expectedStops: [P: ['G', 'R']]
     ]
 
     Map expectedStopsWithMultiRoutes = testCase1.expectedStops
